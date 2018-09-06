@@ -1,0 +1,22 @@
+{
+  "name": "frontend-nanodegree-feedreader",
+  "version": "1.0.0",
+  "description": "Feed Reader",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "console.log(\"works\")"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyesweyedopen/frontend-nanodegree-feedreader.git"
+  },
+  "author": "Baruch Elias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eyesweyedopen/frontend-nanodegree-feedreader/issues"
+  },
+  "homepage": "https://github.com/eyesweyedopen/frontend-nanodegree-feedreader#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
