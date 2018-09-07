@@ -17,6 +17,15 @@
   },
   "homepage": "https://github.com/eyesweyedopen/frontend-nanodegree-feedreader#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "browser-sync": "^2.24.7",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-jasmine-phantom": "^3.0.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "imagemin-pngquant": "^6.0.0"
   }
 }
