@@ -22,8 +22,8 @@ $(function() {
          * page?
          */
         it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            // expect(allFeeds).toBeDefined();
+            expect(allFeeds.length).not.toBe(1);
         });
 
 
