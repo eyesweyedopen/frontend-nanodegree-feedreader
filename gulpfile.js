@@ -12,7 +12,8 @@ const autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('default', ['dist'], function() {
     gulp.watch('app/sass/**/*.scss', ['styles']);
-    gulp.watch('app/js/**/*/js', ['scripts', 'scripts-dist']);
+    gulp.watch('app/js/**/*/js', ['scripts']);
+    gulp.watch('dist/js/all.js', ['scripts-dist']);
     gulp.watch('app/docs/index.html', ['copy-html']);
     gulp.watch('dist/img/*', ['crunch-images']);
     gulp.watch('dist/index.html').on('change', browserSync.reload);
@@ -27,7 +28,7 @@ gulp.task('dist', [
     'copy-fonts',
     'crunch-images',
     'styles',
-    'scripts-dist'
+    'scripts'
 ]);
 
 gulp.task('copy-fonts', function() {
@@ -80,6 +81,6 @@ gulp.task('tests', function() {
     gulp.src('jasmine/spec/feedreader.js')
         .pipe(jasmine({
             integration: true,
-            vendor: 'app/js/**/*.js'
+            vendor: 'js/all.js'
         }));
 });
