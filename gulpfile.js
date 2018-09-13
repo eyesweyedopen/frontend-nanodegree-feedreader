@@ -1,7 +1,7 @@
 const gulp = require("gulp");
 const browserSync = require("browser-sync").create();
 const sass = require('gulp-sass');
-const eslint = require('gulp-eslint');
+const htmlReplace = require('gulp-html-replace');
 const jasmine = require('gulp-jasmine-phantom');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
@@ -53,6 +53,7 @@ gulp.task('scripts-dist', function() {
 
 gulp.task('copy-html', function() {
     gulp.src('app/docs/index.html')
+        .pipe(htmlReplace({ js: 'js/all.js' }))
         .pipe(gulp.dest('./dist'));
 });
 
