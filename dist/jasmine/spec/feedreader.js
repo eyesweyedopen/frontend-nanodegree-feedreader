@@ -23,7 +23,7 @@ $(function() {
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(1);
+            expect(allFeeds.length).not.toBe(0);
         });
 
 

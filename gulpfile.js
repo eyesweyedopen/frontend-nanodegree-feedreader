@@ -16,7 +16,7 @@ gulp.task('default', ['dist'], function() {
     gulp.watch('dist/js/all.js', ['scripts-dist']);
     gulp.watch('app/docs/index.html', ['copy-html']);
     gulp.watch('dist/img/*', ['crunch-images']);
-    gulp.watch('dist/index.html').on('change', browserSync.reload);
+    gulp.watch(['dist/index.html','dist/jasmine/spec/feedreader.js']).on('change', browserSync.reload);
 
     browserSync.init({
         server: './dist'
