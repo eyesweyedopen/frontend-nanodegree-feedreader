@@ -12,7 +12,7 @@ Whether you work in an organization that uses test-driven development or in an o
 
 ## Build tools used:
 - Gulp 3.9.1
-- # Plugins
+- ### Plugins
   - browser-sync 2.24.7
   - gulp-autoprefixer 6.0.0
   - gulp-concat 2.6.1
