@@ -40,7 +40,7 @@ function init() {
  * This function all supports a callback as the second parameter
  * which will be called after everything has run successfully.
  */
- function loadFeed(id, cb) {
+function loadFeed(id, cb) {
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
@@ -68,6 +68,7 @@ function init() {
                  entries.forEach(function(entry) {
                      container.append(entryTemplate(entry));
                  });
+                 console.log(container.children());
 
                  if (cb) {
                      cb();
@@ -75,10 +76,8 @@ function init() {
                },
        error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
-                 if (cb) {
-                     cb();
-                 }
-               },
+                console.log(err);
+                },
        dataType: "json"
      });
  }
