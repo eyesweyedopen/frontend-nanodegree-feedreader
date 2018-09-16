@@ -19,15 +19,13 @@ $(function() {
 
         it('has URLs', function() {
             allFeeds.forEach((el) => {
-                expect(el.url).toBeDefined();
-                expect(el.url.length).not.toBe(0);
+                expect(el.url).toBeTruthy();
             });
         });
 
         it('has names', function() {
             allFeeds.forEach((el) => {
-                expect(el.name).toBeDefined();
-                expect(el.name.length).not.toBe(0);
+                expect(el.name).toBeTruthy();
             });
         });
         
@@ -42,9 +40,14 @@ $(function() {
         });
 
         it('changes visibility', function() {
+
+            /* VARIABLES */
             const menu = $('.menu-icon-link');
+
+            // fire a click event
             menu.click();
             expect($('body').hasClass('menu-hidden')).not.toBe(true);  
+            // fire a click event
             menu.click();
             expect($('body').hasClass('menu-hidden')).toBe(true);  
         });
@@ -54,15 +57,13 @@ $(function() {
     /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
+        // use done to perform async work with the ajax request in loadFeed
         beforeEach(function(done) {
             loadFeed(0, done);
         });
 
         it('are present in .feed', function(done) {
-            const feed = $('.feed').children();
-            const first = feed.first();
-            expect(feed.length).not.toBe(0);
-            expect(first.children().hasClass('entry')).toBe(true);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
             done();
         });
 
@@ -71,16 +72,52 @@ $(function() {
     /* Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
 
+        /* VARIABLES */
+        // Feed arrays to compare two different feeds
         let oldFeed = [];
-        $('.feed').children().each((el) => oldFeed.append(el));
+        let newFeed = [];
 
+        // Random variables to make testing indexes dynamic
+        const rand = Math.floor(Math.random() * 3);
+        const otherRand = Math.abs(1 - rand);
+
+        // Tracker boolean for comparison
+        let isDifferent = false;
+
+        // Setup for async callback to add entries to feed arrays
         beforeEach(function(done) {
-            loadFeed(Math.floor(Math.random() * 3), done);
+
+            loadFeed(rand, function() {  
+                $('.feed .entry').each((index, el) => {
+                    oldFeed.push(el)
+                }); 
+                loadFeed(otherRand, function() {
+                    $('.feed .entry').each((index, el) => {
+                        newFeed.push(el)
+                    });
+                    done();
+                });
+            });
+
         });
 
         it('changes content on screen', function(done) {
-            const feedLength = (oldFeed.length >= $('.feed').children().length) ? $('.feed').children().length : oldFeed.length;
-            expect(oldFeed[feedLength - 1] != $('.feed').children()[feedLength]).toBe(true);
+            for (let i in oldFeed) {
+                // As long as the entry in oldFeed is in newFeed, continue looking for a difference
+                (oldFeed[i] in newFeed) ? isDifferent = false : isDifferent = true;
+    
+                // Once a difference is found, stop comparison
+                if (isDifferent) {
+                    break;
+                };
+            }
+
+            // Make sure the feed arrays contain entries
+            expect(oldFeed).toBeTruthy();
+            expect(newFeed).toBeTruthy();
+            
+            // Check if feeds are different (contain at least one different entry)
+            expect(isDifferent).toBe(true);
             done();
         });
 
