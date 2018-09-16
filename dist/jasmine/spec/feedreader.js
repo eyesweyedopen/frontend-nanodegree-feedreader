@@ -74,27 +74,20 @@ $(function() {
 
         /* VARIABLES */
         // Feed arrays to compare two different feeds
-        let oldFeed = [];
-        let newFeed = [];
+        let oldFeed;
+        let newFeed;
 
         // Random variables to make testing indexes dynamic
         const rand = Math.floor(Math.random() * 3);
         const otherRand = Math.abs(1 - rand);
 
-        // Tracker boolean for comparison
-        let isDifferent = false;
-
         // Setup for async callback to add entries to feed arrays
         beforeEach(function(done) {
 
             loadFeed(rand, function() {  
-                $('.feed .entry').each((index, el) => {
-                    oldFeed.push(el)
-                }); 
+                oldFeed = $('.feed').html()
                 loadFeed(otherRand, function() {
-                    $('.feed .entry').each((index, el) => {
-                        newFeed.push(el)
-                    });
+                    newFeed = $('.feed').html();
                     done();
                 });
             });
@@ -102,22 +95,13 @@ $(function() {
         });
 
         it('changes content on screen', function(done) {
-            for (let i in oldFeed) {
-                // As long as the entry in oldFeed is in newFeed, continue looking for a difference
-                (oldFeed[i] in newFeed) ? isDifferent = false : isDifferent = true;
-    
-                // Once a difference is found, stop comparison
-                if (isDifferent) {
-                    break;
-                };
-            }
 
             // Make sure the feed arrays contain entries
             expect(oldFeed).toBeTruthy();
             expect(newFeed).toBeTruthy();
             
-            // Check if feeds are different (contain at least one different entry)
-            expect(isDifferent).toBe(true);
+            // Check if feeds are different 
+            expect(oldFeed).not.toEqual(newFeed);
             done();
         });
 

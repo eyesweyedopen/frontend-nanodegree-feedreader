@@ -1,2 +1,132 @@
-var allFeeds=[{name:"Udacity Blog",url:"http://blog.udacity.com/feed"},{name:"CSS Tricks",url:"http://feeds.feedburner.com/CssTricks"},{name:"HTML5 Rocks",url:"http://feeds.feedburner.com/html5rocks"},{name:"Linear Digressions",url:"http://feeds.feedburner.com/udacity-linear-digressions"}];function init(){loadFeed(0)}function loadFeed(e,o){var n=allFeeds[e].url,i=allFeeds[e].name;$.ajax({type:"POST",url:"https://rsstojson.udacity.com/parseFeed",data:JSON.stringify({url:n}),contentType:"application/json",success:function(e,n){var t=$(".feed"),a=$(".header-title"),d=e.feed.entries,l=(d.length,Handlebars.compile($(".tpl-entry").html()));a.html(i),t.empty(),d.forEach(function(e){t.append(l(e))}),o&&o()},error:function(e,n,t){console.log(t)},dataType:"json"})}google.setOnLoadCallback(init),$(function(){$(".feed");var n=$(".feed-list"),t=Handlebars.compile($(".tpl-feed-list-item").html()),a=0,e=$(".menu-icon-link");allFeeds.forEach(function(e){e.id=a,n.append(t(e)),a++}),n.on("click","a",function(){var e=$(this);return $("body").addClass("menu-hidden"),loadFeed(e.data("id")),!1}),e.on("click",function(){$("body").toggleClass("menu-hidden")})}());
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFsbC5qcyJdLCJuYW1lcyI6WyJhbGxGZWVkcyIsIm5hbWUiLCJ1cmwiLCJpbml0IiwibG9hZEZlZWQiLCJpZCIsImNiIiwiZmVlZFVybCIsImZlZWROYW1lIiwiJCIsImFqYXgiLCJ0eXBlIiwiZGF0YSIsIkpTT04iLCJzdHJpbmdpZnkiLCJjb250ZW50VHlwZSIsInN1Y2Nlc3MiLCJyZXN1bHQiLCJzdGF0dXMiLCJjb250YWluZXIiLCJ0aXRsZSIsImVudHJpZXMiLCJmZWVkIiwiZW50cnlUZW1wbGF0ZSIsImxlbmd0aCIsIkhhbmRsZWJhcnMiLCJjb21waWxlIiwiaHRtbCIsImVtcHR5IiwiZm9yRWFjaCIsImVudHJ5IiwiYXBwZW5kIiwiZXJyb3IiLCJlcnIiLCJjb25zb2xlIiwibG9nIiwiZGF0YVR5cGUiLCJnb29nbGUiLCJzZXRPbkxvYWRDYWxsYmFjayIsImZlZWRMaXN0IiwiZmVlZEl0ZW1UZW1wbGF0ZSIsImZlZWRJZCIsIm1lbnVJY29uIiwib24iLCJpdGVtIiwidGhpcyIsImFkZENsYXNzIiwidG9nZ2xlQ2xhc3MiXSwibWFwcGluZ3MiOiJBQVNBLElBQUFBLFNBQUEsQ0FDQSxDQUNBQyxLQUFBLGVBQ0FDLElBQUEsZ0NBQ0EsQ0FDQUQsS0FBQSxhQUNBQyxJQUFBLHlDQUNBLENBQ0FELEtBQUEsY0FDQUMsSUFBQSwwQ0FDQSxDQUNBRCxLQUFBLHFCQUNBQyxJQUFBLDJEQVFBLFNBQUFDLE9BRUFDLFNBQUEsR0FXQSxTQUFBQSxTQUFBQyxFQUFBQyxHQUNBLElBQUFDLEVBQUFQLFNBQUFLLEdBQUFILElBQ0FNLEVBQUFSLFNBQUFLLEdBQUFKLEtBRUFRLEVBQUFDLEtBQUEsQ0FDQUMsS0FBQSxPQUNBVCxJQUFBLDBDQUNBVSxLQUFBQyxLQUFBQyxVQUFBLENBQUFaLElBQUFLLElBQ0FRLFlBQUEsbUJBQ0FDLFFBQUEsU0FBQUMsRUFBQUMsR0FFQSxJQUFBQyxFQUFBVixFQUFBLFNBQ0FXLEVBQUFYLEVBQUEsaUJBQ0FZLEVBQUFKLEVBQUFLLEtBQUFELFFBRUFFLEdBREFGLEVBQUFHLE9BQ0FDLFdBQUFDLFFBQUFqQixFQUFBLGNBQUFrQixTQUVBUCxFQUFBTyxLQUFBbkIsR0FDQVcsRUFBQVMsUUFPQVAsRUFBQVEsUUFBQSxTQUFBQyxHQUNBWCxFQUFBWSxPQUFBUixFQUFBTyxNQUdBeEIsR0FDQUEsS0FHQTBCLE1BQUEsU0FBQWYsRUFBQUMsRUFBQWUsR0FFQUMsUUFBQUMsSUFBQUYsSUFFQUcsU0FBQSxTQU9BQyxPQUFBQyxrQkFBQW5DLE1BTUFNLEVBQUEsV0FDQUEsRUFBQSxTQUFBLElBQ0E4QixFQUFBOUIsRUFBQSxjQUNBK0IsRUFBQWYsV0FBQUMsUUFBQWpCLEVBQUEsdUJBQUFrQixRQUNBYyxFQUFBLEVBQ0FDLEVBQUFqQyxFQUFBLG1CQVFBVCxTQUFBNkIsUUFBQSxTQUFBUCxHQUNBQSxFQUFBakIsR0FBQW9DLEVBQ0FGLEVBQUFSLE9BQUFTLEVBQUFsQixJQUVBbUIsTUFRQUYsRUFBQUksR0FBQSxRQUFBLElBQUEsV0FDQSxJQUFBQyxFQUFBbkMsRUFBQW9DLE1BSUEsT0FGQXBDLEVBQUEsUUFBQXFDLFNBQUEsZUFDQTFDLFNBQUF3QyxFQUFBaEMsS0FBQSxRQUNBLElBTUE4QixFQUFBQyxHQUFBLFFBQUEsV0FDQWxDLEVBQUEsUUFBQXNDLFlBQUEsaUJBckNBIiwiZmlsZSI6ImFsbC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIGFwcC5qc1xyXG4gKlxyXG4gKiBUaGlzIGlzIG91ciBSU1MgZmVlZCByZWFkZXIgYXBwbGljYXRpb24uIEl0IHVzZXMgdGhlIEdvb2dsZVxyXG4gKiBGZWVkIFJlYWRlciBBUEkgdG8gZ3JhYiBSU1MgZmVlZHMgYXMgSlNPTiBvYmplY3Qgd2UgY2FuIG1ha2VcclxuICogdXNlIG9mLiBJdCBhbHNvIHVzZXMgdGhlIEhhbmRsZWJhcnMgdGVtcGxhdGluZyBsaWJyYXJ5IGFuZFxyXG4gKiBqUXVlcnkuXHJcbiAqL1xyXG5cclxuLy8gVGhlIG5hbWVzIGFuZCBVUkxzIHRvIGFsbCBvZiB0aGUgZmVlZHMgd2UnZCBsaWtlIGF2YWlsYWJsZS5cclxudmFyIGFsbEZlZWRzID0gW1xyXG4gICAge1xyXG4gICAgICAgIG5hbWU6ICdVZGFjaXR5IEJsb2cnLFxyXG4gICAgICAgIHVybDogJ2h0dHA6Ly9ibG9nLnVkYWNpdHkuY29tL2ZlZWQnXHJcbiAgICB9LCB7XHJcbiAgICAgICAgbmFtZTogJ0NTUyBUcmlja3MnLFxyXG4gICAgICAgIHVybDogJ2h0dHA6Ly9mZWVkcy5mZWVkYnVybmVyLmNvbS9Dc3NUcmlja3MnXHJcbiAgICB9LCB7XHJcbiAgICAgICAgbmFtZTogJ0hUTUw1IFJvY2tzJyxcclxuICAgICAgICB1cmw6ICdodHRwOi8vZmVlZHMuZmVlZGJ1cm5lci5jb20vaHRtbDVyb2NrcydcclxuICAgIH0sIHtcclxuICAgICAgICBuYW1lOiAnTGluZWFyIERpZ3Jlc3Npb25zJyxcclxuICAgICAgICB1cmw6ICdodHRwOi8vZmVlZHMuZmVlZGJ1cm5lci5jb20vdWRhY2l0eS1saW5lYXItZGlncmVzc2lvbnMnXHJcbiAgICB9XHJcbl07XHJcblxyXG4vKiBUaGlzIGZ1bmN0aW9uIHN0YXJ0cyB1cCBvdXIgYXBwbGljYXRpb24uIFRoZSBHb29nbGUgRmVlZFxyXG4gKiBSZWFkZXIgQVBJIGlzIGxvYWRlZCBhc3luY2hvbm91c2x5IGFuZCB3aWxsIHRoZW4gY2FsbCB0aGlzXHJcbiAqIGZ1bmN0aW9uIHdoZW4gdGhlIEFQSSBpcyBsb2FkZWQuXHJcbiAqL1xyXG5mdW5jdGlvbiBpbml0KCkge1xyXG4gICAgLy8gTG9hZCB0aGUgZmlyc3QgZmVlZCB3ZSd2ZSBkZWZpbmVkIChpbmRleCBvZiAwKS5cclxuICAgIGxvYWRGZWVkKDApO1xyXG59XHJcblxyXG4vKiBUaGlzIGZ1bmN0aW9uIHBlcmZvcm1zIGV2ZXJ5dGhpbmcgbmVjZXNzYXJ5IHRvIGxvYWQgYVxyXG4gKiBmZWVkIHVzaW5nIHRoZSBHb29nbGUgRmVlZCBSZWFkZXIgQVBJLiBJdCB3aWxsIHRoZW5cclxuICogcGVyZm9ybSBhbGwgb2YgdGhlIERPTSBvcGVyYXRpb25zIHJlcXVpcmVkIHRvIGRpc3BsYXlcclxuICogZmVlZCBlbnRyaWVzIG9uIHRoZSBwYWdlLiBGZWVkcyBhcmUgcmVmZXJlbmNlZCBieSB0aGVpclxyXG4gKiBpbmRleCBwb3NpdGlvbiB3aXRoaW4gdGhlIGFsbEZlZWRzIGFycmF5LlxyXG4gKiBUaGlzIGZ1bmN0aW9uIGFsbCBzdXBwb3J0cyBhIGNhbGxiYWNrIGFzIHRoZSBzZWNvbmQgcGFyYW1ldGVyXHJcbiAqIHdoaWNoIHdpbGwgYmUgY2FsbGVkIGFmdGVyIGV2ZXJ5dGhpbmcgaGFzIHJ1biBzdWNjZXNzZnVsbHkuXHJcbiAqL1xyXG5mdW5jdGlvbiBsb2FkRmVlZChpZCwgY2IpIHtcclxuICAgICB2YXIgZmVlZFVybCA9IGFsbEZlZWRzW2lkXS51cmwsXHJcbiAgICAgICAgIGZlZWROYW1lID0gYWxsRmVlZHNbaWRdLm5hbWU7XHJcblxyXG4gICAgICQuYWpheCh7XHJcbiAgICAgICB0eXBlOiBcIlBPU1RcIixcclxuICAgICAgIHVybDogJ2h0dHBzOi8vcnNzdG9qc29uLnVkYWNpdHkuY29tL3BhcnNlRmVlZCcsXHJcbiAgICAgICBkYXRhOiBKU09OLnN0cmluZ2lmeSh7dXJsOiBmZWVkVXJsfSksXHJcbiAgICAgICBjb250ZW50VHlwZTpcImFwcGxpY2F0aW9uL2pzb25cIixcclxuICAgICAgIHN1Y2Nlc3M6IGZ1bmN0aW9uIChyZXN1bHQsIHN0YXR1cyl7XHJcblxyXG4gICAgICAgICAgICAgICAgIHZhciBjb250YWluZXIgPSAkKCcuZmVlZCcpLFxyXG4gICAgICAgICAgICAgICAgICAgICB0aXRsZSA9ICQoJy5oZWFkZXItdGl0bGUnKSxcclxuICAgICAgICAgICAgICAgICAgICAgZW50cmllcyA9IHJlc3VsdC5mZWVkLmVudHJpZXMsXHJcbiAgICAgICAgICAgICAgICAgICAgIGVudHJpZXNMZW4gPSBlbnRyaWVzLmxlbmd0aCxcclxuICAgICAgICAgICAgICAgICAgICAgZW50cnlUZW1wbGF0ZSA9IEhhbmRsZWJhcnMuY29tcGlsZSgkKCcudHBsLWVudHJ5JykuaHRtbCgpKTtcclxuXHJcbiAgICAgICAgICAgICAgICAgdGl0bGUuaHRtbChmZWVkTmFtZSk7ICAgLy8gU2V0IHRoZSBoZWFkZXIgdGV4dFxyXG4gICAgICAgICAgICAgICAgIGNvbnRhaW5lci5lbXB0eSgpOyAgICAgIC8vIEVtcHR5IG91dCBhbGwgcHJldmlvdXMgZW50cmllc1xyXG5cclxuICAgICAgICAgICAgICAgICAvKiBMb29wIHRocm91Z2ggdGhlIGVudHJpZXMgd2UganVzdCBsb2FkZWQgdmlhIHRoZSBHb29nbGVcclxuICAgICAgICAgICAgICAgICAgKiBGZWVkIFJlYWRlciBBUEkuIFdlJ2xsIHRoZW4gcGFyc2UgdGhhdCBlbnRyeSBhZ2FpbnN0IHRoZVxyXG4gICAgICAgICAgICAgICAgICAqIGVudHJ5VGVtcGxhdGUgKGNyZWF0ZWQgYWJvdmUgdXNpbmcgSGFuZGxlYmFycykgYW5kIGFwcGVuZFxyXG4gICAgICAgICAgICAgICAgICAqIHRoZSByZXN1bHRpbmcgSFRNTCB0byB0aGUgbGlzdCBvZiBlbnRyaWVzIG9uIHRoZSBwYWdlLlxyXG4gICAgICAgICAgICAgICAgICAqL1xyXG4gICAgICAgICAgICAgICAgIGVudHJpZXMuZm9yRWFjaChmdW5jdGlvbihlbnRyeSkge1xyXG4gICAgICAgICAgICAgICAgICAgICBjb250YWluZXIuYXBwZW5kKGVudHJ5VGVtcGxhdGUoZW50cnkpKTtcclxuICAgICAgICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgICAgICAgICAgaWYgKGNiKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgIGNiKCk7XHJcbiAgICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICB9LFxyXG4gICAgICAgZXJyb3I6IGZ1bmN0aW9uIChyZXN1bHQsIHN0YXR1cywgZXJyKXtcclxuICAgICAgICAgICAgICAgICAvL3J1biBvbmx5IHRoZSBjYWxsYmFjayB3aXRob3V0IGF0dGVtcHRpbmcgdG8gcGFyc2UgcmVzdWx0IGR1ZSB0byBlcnJvclxyXG4gICAgICAgICAgICAgICAgY29uc29sZS5sb2coZXJyKTtcclxuICAgICAgICAgICAgICAgIH0sXHJcbiAgICAgICBkYXRhVHlwZTogXCJqc29uXCJcclxuICAgICB9KTtcclxuIH1cclxuXHJcbi8qIEdvb2dsZSBBUEk6IExvYWRzIHRoZSBGZWVkIFJlYWRlciBBUEkgYW5kIGRlZmluZXMgd2hhdCBmdW5jdGlvblxyXG4gKiB0byBjYWxsIHdoZW4gdGhlIEZlZWQgUmVhZGVyIEFQSSBpcyBkb25lIGxvYWRpbmcuXHJcbiAqL1xyXG5nb29nbGUuc2V0T25Mb2FkQ2FsbGJhY2soaW5pdCk7XHJcblxyXG4vKiBBbGwgb2YgdGhpcyBmdW5jdGlvbmFsaXR5IGlzIGhlYXZpbHkgcmVsaWFudCB1cG9uIHRoZSBET00sIHNvIHdlXHJcbiAqIHBsYWNlIG91ciBjb2RlIGluIHRoZSAkKCkgZnVuY3Rpb24gdG8gZW5zdXJlIGl0IGRvZXNuJ3QgZXhlY3V0ZVxyXG4gKiB1bnRpbCB0aGUgRE9NIGlzIHJlYWR5LlxyXG4gKi9cclxuJChmdW5jdGlvbigpIHtcclxuICAgIHZhciBjb250YWluZXIgPSAkKCcuZmVlZCcpLFxyXG4gICAgICAgIGZlZWRMaXN0ID0gJCgnLmZlZWQtbGlzdCcpLFxyXG4gICAgICAgIGZlZWRJdGVtVGVtcGxhdGUgPSBIYW5kbGViYXJzLmNvbXBpbGUoJCgnLnRwbC1mZWVkLWxpc3QtaXRlbScpLmh0bWwoKSksXHJcbiAgICAgICAgZmVlZElkID0gMCxcclxuICAgICAgICBtZW51SWNvbiA9ICQoJy5tZW51LWljb24tbGluaycpO1xyXG5cclxuICAgIC8qIExvb3AgdGhyb3VnaCBhbGwgb2Ygb3VyIGZlZWRzLCBhc3NpZ25pbmcgYW4gaWQgcHJvcGVydHkgdG9cclxuICAgICAqIGVhY2ggb2YgdGhlIGZlZWRzIGJhc2VkIHVwb24gaXRzIGluZGV4IHdpdGhpbiB0aGUgYXJyYXkuXHJcbiAgICAgKiBUaGVuIHBhcnNlIHRoYXQgZmVlZCBhZ2FpbnN0IHRoZSBmZWVkSXRlbVRlbXBsYXRlIChjcmVhdGVkXHJcbiAgICAgKiBhYm92ZSB1c2luZyBIYW5kbGViYXJzKSBhbmQgYXBwZW5kIGl0IHRvIHRoZSBsaXN0IG9mIGFsbFxyXG4gICAgICogYXZhaWxhYmxlIGZlZWRzIHdpdGhpbiB0aGUgbWVudS5cclxuICAgICAqL1xyXG4gICAgYWxsRmVlZHMuZm9yRWFjaChmdW5jdGlvbihmZWVkKSB7XHJcbiAgICAgICAgZmVlZC5pZCA9IGZlZWRJZDtcclxuICAgICAgICBmZWVkTGlzdC5hcHBlbmQoZmVlZEl0ZW1UZW1wbGF0ZShmZWVkKSk7XHJcblxyXG4gICAgICAgIGZlZWRJZCsrO1xyXG4gICAgfSk7XHJcblxyXG4gICAgLyogV2hlbiBhIGxpbmsgaW4gb3VyIGZlZWRMaXN0IGlzIGNsaWNrZWQgb24sIHdlIHdhbnQgdG8gaGlkZVxyXG4gICAgICogdGhlIG1lbnUsIGxvYWQgdGhlIGZlZWQsIGFuZCBwcmV2ZW50IHRoZSBkZWZhdWx0IGFjdGlvblxyXG4gICAgICogKGZvbGxvd2luZyB0aGUgbGluaykgZnJvbSBvY2N1cnJpbmcuXHJcbiAgICAgKi9cclxuICAgIFxyXG4gICAgZmVlZExpc3Qub24oJ2NsaWNrJywgJ2EnLCBmdW5jdGlvbigpIHtcclxuICAgICAgICB2YXIgaXRlbSA9ICQodGhpcyk7XHJcblxyXG4gICAgICAgICQoJ2JvZHknKS5hZGRDbGFzcygnbWVudS1oaWRkZW4nKTtcclxuICAgICAgICBsb2FkRmVlZChpdGVtLmRhdGEoJ2lkJykpO1xyXG4gICAgICAgIHJldHVybiBmYWxzZTtcclxuICAgIH0pO1xyXG5cclxuICAgIC8qIFdoZW4gdGhlIG1lbnUgaWNvbiBpcyBjbGlja2VkIG9uLCB3ZSBuZWVkIHRvIHRvZ2dsZSBhIGNsYXNzXHJcbiAgICAgKiBvbiB0aGUgYm9keSB0byBwZXJmb3JtIHRoZSBoaWRpbmcvc2hvd2luZyBvZiBvdXIgbWVudS5cclxuICAgICAqL1xyXG4gICAgbWVudUljb24ub24oJ2NsaWNrJywgZnVuY3Rpb24oKSB7XHJcbiAgICAgICAgJCgnYm9keScpLnRvZ2dsZUNsYXNzKCdtZW51LWhpZGRlbicpO1xyXG4gICAgfSk7XHJcbn0oKSk7XHJcbiJdfQ==
+/* app.js
+ *
+ * This is our RSS feed reader application. It uses the Google
+ * Feed Reader API to grab RSS feeds as JSON object we can make
+ * use of. It also uses the Handlebars templating library and
+ * jQuery.
+ */
+
+// The names and URLs to all of the feeds we'd like available.
+var allFeeds = [
+    {
+        name: 'Udacity Blog',
+        url: 'http://blog.udacity.com/feed'
+    }, {
+        name: 'CSS Tricks',
+        url: 'http://feeds.feedburner.com/CssTricks'
+    }, {
+        name: 'HTML5 Rocks',
+        url: 'http://feeds.feedburner.com/html5rocks'
+    }, {
+        name: 'Linear Digressions',
+        url: 'http://feeds.feedburner.com/udacity-linear-digressions'
+    }
+];
+
+/* This function starts up our application. The Google Feed
+ * Reader API is loaded asynchonously and will then call this
+ * function when the API is loaded.
+ */
+function init() {
+    // Load the first feed we've defined (index of 0).
+    loadFeed(0);
+}
+
+/* This function performs everything necessary to load a
+ * feed using the Google Feed Reader API. It will then
+ * perform all of the DOM operations required to display
+ * feed entries on the page. Feeds are referenced by their
+ * index position within the allFeeds array.
+ * This function all supports a callback as the second parameter
+ * which will be called after everything has run successfully.
+ */
+function loadFeed(id, cb) {
+     var feedUrl = allFeeds[id].url,
+         feedName = allFeeds[id].name;
+
+     $.ajax({
+       type: "POST",
+       url: 'https://rsstojson.udacity.com/parseFeed',
+       data: JSON.stringify({url: feedUrl}),
+       contentType:"application/json",
+       success: function (result, status){
+
+                 var container = $('.feed'),
+                     title = $('.header-title'),
+                     entries = result.feed.entries,
+                     entriesLen = entries.length,
+                     entryTemplate = Handlebars.compile($('.tpl-entry').html());
+
+                 title.html(feedName);   // Set the header text
+                 container.empty();      // Empty out all previous entries
+
+                 /* Loop through the entries we just loaded via the Google
+                  * Feed Reader API. We'll then parse that entry against the
+                  * entryTemplate (created above using Handlebars) and append
+                  * the resulting HTML to the list of entries on the page.
+                  */
+                 entries.forEach(function(entry) {
+                     container.append(entryTemplate(entry));
+                 });
+
+                 if (cb) {
+                     cb();
+                 }
+               },
+       error: function (result, status, err){
+                 //run only the callback without attempting to parse result due to error
+                console.log(err);
+                },
+       dataType: "json"
+     });
+ }
+
+/* Google API: Loads the Feed Reader API and defines what function
+ * to call when the Feed Reader API is done loading.
+ */
+google.setOnLoadCallback(init);
+
+/* All of this functionality is heavily reliant upon the DOM, so we
+ * place our code in the $() function to ensure it doesn't execute
+ * until the DOM is ready.
+ */
+$(function() {
+    var container = $('.feed'),
+        feedList = $('.feed-list'),
+        feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
+        feedId = 0,
+        menuIcon = $('.menu-icon-link');
+
+    /* Loop through all of our feeds, assigning an id property to
+     * each of the feeds based upon its index within the array.
+     * Then parse that feed against the feedItemTemplate (created
+     * above using Handlebars) and append it to the list of all
+     * available feeds within the menu.
+     */
+    allFeeds.forEach(function(feed) {
+        feed.id = feedId;
+        feedList.append(feedItemTemplate(feed));
+
+        feedId++;
+    });
+
+    /* When a link in our feedList is clicked on, we want to hide
+     * the menu, load the feed, and prevent the default action
+     * (following the link) from occurring.
+     */
+    
+    feedList.on('click', 'a', function() {
+        var item = $(this);
+
+        $('body').addClass('menu-hidden');
+        loadFeed(item.data('id'));
+        return false;
+    });
+
+    /* When the menu icon is clicked on, we need to toggle a class
+     * on the body to perform the hiding/showing of our menu.
+     */
+    menuIcon.on('click', function() {
+        $('body').toggleClass('menu-hidden');
+    });
+}());
