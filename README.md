@@ -28,3 +28,8 @@ Whether you work in an organization that uses test-driven development or in an o
 ## Using Gulp tasks
 
 All tasks are included in the default task, so simply run "gulp" to execute all tasks, including launching the jasmine framework.  (I used npm to install all packages)
+
+## Ways to open the Feedreader application
+
+  - Navigate to dist/index.html and open that in a browser of your choice
+  - With gulp and dependencies installed, run 'gulp' in the terminal in the frontend-nanodegree-feedreader repository.
