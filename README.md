@@ -31,5 +31,13 @@ All tasks are included in the default task, so simply run "gulp" to execute all 
 
 ## Ways to open the Feedreader application
 
-  - Navigate to dist/index.html and open that in a browser of your choice
-  - With gulp and dependencies installed, run 'gulp' in the terminal in the frontend-nanodegree-feedreader repository.
+  ### To view hosted application:
+  
+  #### Go to https://eyesweyedopen.github.io/frontend-nanodegree-feedreader/ in a browser of your choice
+  
+  ### To view application locally:
+  
+  #### Clone/download this repository and either:
+  
+   - Navigate to dist/index.html and open that in a browser of your choice
+   - With gulp and dependencies installed, run 'gulp' in the terminal in the frontend-nanodegree-feedreader repository/directory.
